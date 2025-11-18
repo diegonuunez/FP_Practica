@@ -1,34 +1,29 @@
 #include "lib.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
-char* cargaArchivo(char* name){
-    long size = 0;
-    char* buffer;
-    size_t bytes = 0;
+FileEntity* cargaArchivo(char* name){
 
-    FILE* file = fopen(name, "r");
-    if (file == NULL){
-        fprintf(stderr, "Error: No se ha podido abrir archivo %s\n", name);
-        exit(1);
+    FileEntity *fileEntity;
+    fileEntity = (FileEntity*)malloc(sizeof(FileEntity));
+    fileEntity->name = strdup(name);
+    fileEntity->file = fopen(fileEntity->name,"r");
+
+    fseek(fileEntity->file,0,SEEK_END);
+    fileEntity->size = ftell(fileEntity->file);
+    fseek(fileEntity->file,0,SEEK_SET);
+
+    fileEntity->buffer =(char*)malloc(fileEntity->size + 1);
+    if(fileEntity->buffer == NULL){
+        fprintf(stderr,"Error: No se pudo reservar memoria");
     }
+    fread(fileEntity->buffer,1,fileEntity->size,fileEntity->file);
 
-    fseek(file, 0, SEEK_END);
-    size = ftell(file);
-    fseek(file, 0, SEEK_SET);
+    fileEntity->buffer[fileEntity->size] = '\0';
 
-    buffer = (char*)malloc(size + 1);
-    if (buffer == NULL){
-        fprintf(stderr, "Error: no se pudo reservar memoria.\n");
-        fclose(file);
-        exit(1);
-    }
+    fclose(fileEntity->file);
 
-    bytes = fread(buffer, 1, size, file);
-    buffer[bytes] = '\0'; 
-
-    fclose(file); 
-
-    return buffer;
+    return fileEntity;
 }
