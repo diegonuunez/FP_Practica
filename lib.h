@@ -1,19 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #ifndef LIB_H
 #define LIB_H
 
-typedef struct Entity{
-    FILE* file;
-    char* name;
-    char* buffer;
-    size_t size;
-} FileEntity;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
-char* capturaCommand(char* command);
-FileEntity* cargaArchivo(char* name);
-int commandHandler(char* command);
+#define COLOR_RESET   "\x1b[0m"
+#define COLOR_RED     "\x1b[31m"
+#define COLOR_GREEN   "\x1b[32m"
+#define COLOR_YELLOW  "\x1b[33m"
+#define COLOR_WHITE   "\x1b[37m"
+
+
+void printStudentInfo();
+
+
+
 
 #endif
