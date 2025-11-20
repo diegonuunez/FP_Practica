@@ -9,8 +9,6 @@ void printStudentInfo(){
 }
 
 void commandHandler(char* command){
-
-
     char** tokenVector ;
     int tokenCount = 0;
 
@@ -32,23 +30,23 @@ void commandHandler(char* command){
         tokenCount++;
         token = strtok(NULL, " \0");
     }
+    commandManager(tokenVector, tokenCount);
 
     for(int i = 0; i < tokenCount; i++){
-        printf("Token %d: %s\n", i, tokenVector[i]);
+        free(tokenVector[i]);
     }
-    commandManager(tokenVector, tokenCount);
+    free(tokenVector);
 }
 
 
 void commandManager(char** tokenVector, int tokenCount){
 
     if(strcmp(tokenVector[0], "salir\0") == 0){
-        printf("%sExiting program...%s\n", COLOR_RED, COLOR_RESET);
+        printf("%s FIN... %s\n", COLOR_GREEN, COLOR_RESET);
         exit(0);
-    } else if(strcmp(tokenVector[0], "ayuda\0") == 0){
-        printf("%sAvailable commands:%s\n", COLOR_GREEN, COLOR_RESET);
-        printf("%ssalir%s - Exit the program\n", COLOR_YELLOW, COLOR_RESET);
-        printf("%sayuda%s - Show this help message\n", COLOR_YELLOW, COLOR_RESET);
+    } else if(strcmp(tokenVector[0], "cargar\0") == 0){
+        
+        printf("%scargar%s - Load a file\n", COLOR_YELLOW, COLOR_RESET);
     } else {
         printf("%sUnknown command: %s%s\n", COLOR_RED, tokenVector[0], COLOR_RESET);
     }
