@@ -5,20 +5,54 @@
 
 
 void printStudentInfo(){
-    printf("%s Diego Nuñez Conejo - diego.nunez@goumh.umh.es \n",COLOR_YELLOW);
+    printf("%s Diego Nunez Conejo - diego.nunez@goumh.umh.es \n",COLOR_YELLOW);
 }
 
-char* commandHandler(char* command){
-    char* trimmedCommand = (char*)malloc(strlen(command)+1);
-    for(int i = 0; command[i]; i++){
-        trimmedCommand[i] = tolower(command[i]);
-    }
-    char* firstPartCommand = strtok(trimmedCommand, " ");
-    
-    char* secondPartCommand = strtok(NULL, " \n");
+void commandHandler(char* command){
 
-    free(trimmedCommand);
-    return firstPartCommand, secondPartCommand;
+
+    char** tokenVector ;
+    int tokenCount = 0;
+
+    for(int i = 0; command[i]; i++){
+        command[i] = tolower(command[i]);
+        if(command[i] == '\n'){
+            command[i] = '\0';
+        }
+        if(command[i] == ' '){
+            tokenCount++;
+        }
+    }
+    tokenVector = (char**) malloc((tokenCount + 1) * sizeof(char*));
+    tokenCount = 0;
+    char* token = strtok(command, " \0");
+    while(token != NULL){
+        tokenVector[tokenCount] = (char*) malloc((strlen(token) + 1) * sizeof(char));
+        strcpy(tokenVector[tokenCount], token);
+        tokenCount++;
+        token = strtok(NULL, " \0");
+    }
+
+    for(int i = 0; i < tokenCount; i++){
+        printf("Token %d: %s\n", i, tokenVector[i]);
+    }
+    commandManager(tokenVector, tokenCount);
+}
+
+
+void commandManager(char** tokenVector, int tokenCount){
+
+    if(strcmp(tokenVector[0], "salir\0") == 0){
+        printf("%sExiting program...%s\n", COLOR_RED, COLOR_RESET);
+        exit(0);
+    } else if(strcmp(tokenVector[0], "ayuda\0") == 0){
+        printf("%sAvailable commands:%s\n", COLOR_GREEN, COLOR_RESET);
+        printf("%ssalir%s - Exit the program\n", COLOR_YELLOW, COLOR_RESET);
+        printf("%sayuda%s - Show this help message\n", COLOR_YELLOW, COLOR_RESET);
+    } else {
+        printf("%sUnknown command: %s%s\n", COLOR_RED, tokenVector[0], COLOR_RESET);
+    }
+
 }
 
 

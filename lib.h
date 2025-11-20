@@ -15,7 +15,8 @@
 
 
 void printStudentInfo();
-char* commandHandler(char* command);
+void commandHandler(char* command);
+void commandManager(char** tokenVector, int tokenCount);
 
 
 
