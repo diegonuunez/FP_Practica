@@ -13,6 +13,15 @@
 #define COLOR_YELLOW  "\x1b[33m"
 #define COLOR_WHITE   "\x1b[37m"
 
+typedef struct Block{
+
+    char blockName[40];
+    char* buffer;
+    struct Block* next;
+    size_t size;
+
+} nodeBlock;
+
 
 void printStudentInfo();
 void commandHandler(char* command);
