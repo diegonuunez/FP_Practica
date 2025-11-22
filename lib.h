@@ -24,8 +24,8 @@ typedef struct Block{
 
 
 void printStudentInfo();
-void commandHandler(char* command);
-void commandManager(char** tokenVector, int tokenCount);
+char** commandHandler(char* command, int* size);
+void commandManager(char* command);
 
 
 

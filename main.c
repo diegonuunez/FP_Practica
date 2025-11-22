@@ -12,7 +12,7 @@ int main() {
         printf("%s%s ",COLOR_GREEN,prompt);
         printf("%s",COLOR_WHITE);
         fgets(command, sizeof(command), stdin);
-        commandHandler(command);
+        commandManager(command);
         
     }
 
