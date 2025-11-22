@@ -30,7 +30,7 @@ typedef struct Status{
 void printStudentInfo();
 char** commandClient(char* command, int* size);
 void commandManager(char* command);
-nodeBlock* loadFileInBlock(char* fileName)
+nodeBlock* loadFileInBlock(char* fileName);
 
 
 #endif
