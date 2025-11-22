@@ -8,7 +8,7 @@ void printStudentInfo(){
     printf("%s Diego Nunez Conejo - diego.nunez@goumh.umh.es \n",COLOR_YELLOW);
 }
 
-char** commandHandler(char* command, int* size){
+char** commandClient(char* command, int* size){
     char** tokenVector;
     int tokenCount = 0;
     int index = 0;

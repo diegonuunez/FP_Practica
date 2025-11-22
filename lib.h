@@ -22,11 +22,15 @@ typedef struct Block{
 
 } nodeBlock;
 
+typedef struct Status{
+    nodeBlock* blockList;
+    nodeBlock* currentBlock;
+} BlockStatus;
 
 void printStudentInfo();
-char** commandHandler(char* command, int* size);
+char** commandClient(char* command, int* size);
 void commandManager(char* command);
-
+nodeBlock* loadFileInBlock(char* fileName)
 
 
 #endif
